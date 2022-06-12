@@ -5,5 +5,6 @@ DIR=/home/pi/rpi_live/photos
 FILENAME=${DATETIME}.jpg
 FILE=${DIR}/${FILENAME}
 
-libcamera-still --vflip -o ${FILE}
+killall libcamera-still
+libcamera-still --vflip --hflip -o ${FILE}
 scp ${FILE} sagan:~/rpi_live/photos/${FILENAME}
