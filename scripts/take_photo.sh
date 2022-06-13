@@ -7,4 +7,5 @@ FILE=${DIR}/${FILENAME}
 
 killall libcamera-still
 libcamera-still --vflip --hflip --immediate -t 60000 -o ${FILE}
-scp ${FILE} sagan:~/rpi_live/photos/${FILENAME}
+#scp ${FILE} sagan:~/rpi_live/photos/${FILENAME}
+rsync -P ${FILE} sagan:~/rpi_live/photos/${FILENAME}
