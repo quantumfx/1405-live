@@ -29,15 +29,64 @@ class MyServer(BaseHTTPRequestHandler):
         last_reading = get_temp_humidity()
         last_photo = get_last_photo()
 
+        html_content = f"""
+        <html>
+            <head>
+                <title>Live from 1405!</title>
+                <meta http-equiv=\"refresh\" content=\"300\">
+                <style>
+              html, body, #wrapper {{
+                height:100%;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                border: 0;
+                color: white;
+                overflow: hidden;
+              }}
+              #wrapper td {{
+                vertical-align: middle;
+                text-align: center;
+              }}
+              #grad {{
+                background: #060702;
+                background: -moz-linear-gradient(top,  #060702 0%, #12130b 100%);
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#060702), color-stop(100%,#12130b));
+                background: -webkit-linear-gradient(top,  #060702 0%,#12130b 100%);
+                background: -o-linear-gradient(top,  #060702 0%,#12130b 100%);
+                background: -ms-linear-gradient(top,  #060702 0%,#12130b 100%);
+                background: linear-gradient(to bottom,  #060702 0%,#12130b 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#060702', endColorstr='#12130b',GradientType=0 );
+              }}
+              .responsive {{
+                width: 80%;
+                height: auto;
+              }}
+                </style>
+            </head>
+            <body id=\"grad\">
+            <p>Time: {datetime.datetime.fromisoformat(last_reading[0]).strftime('%c')}</p>
+            <p>Temperature: {last_reading[1]} C</p>
+            <p>Relative Humidity: {last_reading[2]} %</p>
+            <table id="wrapper">
+              <tr>
+                <td><img src=\"{last_photo}\" alt=\"{last_photo}\" class=\"responsive\"/></td>
+              </tr>
+            </table>
+            </body>
+        </html>
+        """
+
         if self.path=="/":
             self.send_response(200)
             self.send_header("Content-type", "text/html")
             self.end_headers()
-            self.wfile.write(bytes("<html><head><title>Live from 1405!</title></head>", "utf-8"))
-            self.wfile.write(bytes("<body>", "utf-8"))
-            self.wfile.write(bytes("<p>Time: {}</p><p>Temperature: {} C</p><p>Relative Humidity: {} %</p>".format(datetime.datetime.fromisoformat(last_reading[0]).strftime('%c'),*last_reading[1:]), "utf-8"))
-            self.wfile.write(bytes("<table><tr><td><img src=\"{}\" alt=\"{}\" /></td></tr></table>".format(last_photo,last_photo), "utf-8"))
-            self.wfile.write(bytes("</body></html>", "utf-8"))
+            self.wfile.write(bytes(html_content, "utf-8"))
+            #self.wfile.write(bytes("<html><head><title>Live from 1405!</title></head>", "utf-8"))
+            #self.wfile.write(bytes("<body>", "utf-8"))
+            #self.wfile.write(bytes("<p>Time: {}</p><p>Temperature: {} C</p><p>Relative Humidity: {} %</p>".format(datetime.datetime.fromisoformat(last_reading[0]).strftime('%c'),*last_reading[1:]), "utf-8"))
+            #self.wfile.write(bytes("<table><tr><td><img src=\"{}\" alt=\"{}\" /></td></tr></table>".format(last_photo,last_photo), "utf-8"))
+            #self.wfile.write(bytes("</body></html>", "utf-8"))
         try:
             send_reply = False
             is_binary = False
