@@ -1,5 +1,6 @@
 photos/*.jpg
 *.csv
+logs/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
