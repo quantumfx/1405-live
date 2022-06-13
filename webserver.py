@@ -33,7 +33,7 @@ class MyServer(BaseHTTPRequestHandler):
         <html>
             <head>
                 <title>Live from 1405!</title>
-                <meta http-equiv=\"refresh\" content=\"300\">
+                <meta http-equiv=\"refresh\" content=\"60\">
                 <style>
               html, body, #wrapper {{
                 height:100%;
@@ -43,6 +43,13 @@ class MyServer(BaseHTTPRequestHandler):
                 border: 0;
                 color: white;
                 overflow: hidden;
+              }}
+              #image {{
+                background: #060702;
+                background-image: url(\"{last_photo}\");
+                background-position: center center;
+                background-size: cover;
+                background-repeat: no-repeat;
               }}
               #wrapper td {{
                 vertical-align: middle;
@@ -59,20 +66,29 @@ class MyServer(BaseHTTPRequestHandler):
                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#060702', endColorstr='#12130b',GradientType=0 );
               }}
               .responsive {{
-                width: 80%;
+                width: 60%;
                 height: auto;
+              }}
+              p {{
+                font-family: sans-serif;
+                font-size: 24px;
+                font-weight: bold;
+            	color: white;
+            	-webkit-text-stroke-width: 1px;
+            	-webkit-text-stroke-color: black;
               }}
                 </style>
             </head>
-            <body id=\"grad\">
-            <p>Time: {datetime.datetime.fromisoformat(last_reading[0]).strftime('%c')}</p>
-            <p>Temperature: {last_reading[1]} C</p>
+            <body id=\"image\">
+            <p>Photo taken every 30min, sensor reading taken every 5min.</p>
+            <p>Sensor Reading Time: {datetime.datetime.fromisoformat(last_reading[0]).strftime('%c')}</p>
+            <p>Temperature: {last_reading[1]} &#176;C</p>
             <p>Relative Humidity: {last_reading[2]} %</p>
-            <table id="wrapper">
+            <!-- <table id="wrapper">
               <tr>
                 <td><img src=\"{last_photo}\" alt=\"{last_photo}\" class=\"responsive\"/></td>
               </tr>
-            </table>
+            </table> -->
             </body>
         </html>
         """
