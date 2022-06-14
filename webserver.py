@@ -79,7 +79,7 @@ class MyServer(BaseHTTPRequestHandler):
                 </style>
             </head>
             <body id=\"image\">
-            <p>Photo taken every 30min, sensor reading taken every 5min.</p>
+            <p>Photo taken every min, sensor reading taken every 5min.</p>
             <p>Sensor Reading Time: {datetime.datetime.fromisoformat(last_reading[0]).strftime('%c')}</p>
             <p>Temperature: {last_reading[1]} &#176;C</p>
             <p>Relative Humidity: {last_reading[2]} %</p>
