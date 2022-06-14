@@ -12,9 +12,11 @@ photo_dir = 'photos/'
 data_file = 'temp_humidity.csv'
 
 def get_last_photo(photo_dir = photo_dir):
-    files = glob.glob(photo_dir+'*')
-    files.sort(key = os.path.getmtime)
-    photo = files[-1]
+    #files = glob.glob(photo_dir+'*')
+    #files.sort(key = os.path.getmtime)
+    #photo = files[-1]
+    # use small image instead of latest image for bandwidth
+    photo = photo_dir + 'current_small.jpg'
     return photo
 
 def get_temp_humidity(file = data_file):
@@ -130,6 +132,7 @@ class MyServer(BaseHTTPRequestHandler):
                     print('trying to open',os.curdir+os.sep+self.path)
                     self.send_response(200)
                     self.send_header('Content-type', mimetype)
+                    self.send_header('Cache-Control', 'max-age=0')
                     self.end_headers()
                     self.wfile.write(f.read())
             return
