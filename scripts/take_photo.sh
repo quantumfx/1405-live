@@ -6,5 +6,5 @@ FILENAME=current.jpg
 FILE=$DIR/$FILENAME
 
 killall libcamera-still
-libcamera-still --vflip --hflip --immediate -t 30000 -o $FILE --shutter 3000
+libcamera-still --vflip --hflip --immediate -t 30000 -o $FILE --shutter 5000
 rsync -P $FILE sagan:~/rpi_live/photos/$FILENAME
