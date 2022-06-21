@@ -7,4 +7,3 @@ FILE=$DIR/$FILENAME
 
 python $DIR/scripts/temp_hum.py
 cat $FILE | ssh -T sagan "cat - >> /home/fx/rpi_live/temp_humidity.csv"
-sudo shutdown -r now
