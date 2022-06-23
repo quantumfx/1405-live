@@ -10,6 +10,6 @@ TDIFF=$(expr $UNIXTIME_CURRENT - $UNIXTIME_FILE)
 
 if [ $TDIFF -gt 300 ];
 then
-    echo "It\'s been $TDIFF s since last photo was taken, rebooting at $DATETIME ."
-    sudo /sbin/shutdown -r now
+#    echo "It\'s been $TDIFF s since last photo was taken, rebooting at $DATETIME ."
+#    sudo /sbin/shutdown -r now
 fi
