@@ -8,3 +8,4 @@ FILE=$DIR/$FILENAME
 killall libcamera-still
 libcamera-still --vflip --hflip --immediate -t 30000 -o $FILE
 rsync -P $FILE sagan:~/rpi_live/photos/$FILENAME
+sudo reboot
