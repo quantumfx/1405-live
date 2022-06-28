@@ -1,7 +1,8 @@
 #!/bin/bash
 
 DATETIME=$(date +"%Y-%m-%dT%T")
-DIR=$HOME/rpi_live/photos
+PIHOME=/home/pi
+DIR=$PIHOME/rpi_live/photos
 FILENAME=current.jpg
 FILE=$DIR/$FILENAME
 
@@ -15,6 +16,6 @@ UPTIME=${UPTIME%%.*}
 
 if [[ $TDIFF -gt 300 ]] && [[ $UPTIME -gt 300 ]];
 then
-    echo "It\'s been $TDIFF s since last photo was taken, rebooting at $DATETIME ."
-    sudo /sbin/shutdown -r now
+    echo "It\'s been $TDIFF s since last photo was taken (uptime: $UPTIME s), rebooting at $DATETIME ."
+    sudo shutdown -r now
 fi
