@@ -10,7 +10,7 @@ utcoffset = -4*u.hr
 suntimesarr = np.zeros((365,2),dtype=object)
 delta_midnight = np.linspace(4,28,10000,endpoint=False)*u.hr
 
-for i in range(0,5):
+for i in range(0,365):
     times = Time('2022-01-01T00:00:00') + i*u.day + delta_midnight
 
     frame = AltAz(obstime=times, location=burton_tower)
